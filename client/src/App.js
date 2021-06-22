@@ -5,7 +5,7 @@ import Home from "./components/home/Home";
 import Email from "./components/email/Email";
 
 const App = () => {
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState({});
 
   return (
     <div class="h-full">

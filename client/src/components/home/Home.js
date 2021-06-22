@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Title, LoginTextField, LoginButton } from "./Materials";
-import EmailService from "../../services/EmailService";
 import UserProfile from "../../contexts/UserProfile";
+import EmailService from "../../services/EmailService";
 
 const Home = () => {
   const history = useHistory();
@@ -11,19 +11,24 @@ const Home = () => {
   const passwordRef = React.createRef();
 
   function handleClick(){
-    const emailService = new EmailService();
-    console.log(usernameRef.current.children[1].children[0].value, passwordRef.current.children[1].children[0].value)
-    try{
-      emailService.authenticateUser(usernameRef.current.children[1].children[0].value, passwordRef.current.children[1].children[0].value);
-      // console.log(usernameRef);
-      // setProfile(emailService);
-    }
-    catch(err){
-      console.log("Username or password is incorrect");
-    }
-   
-  
+    let credentials = {
+      email: usernameRef.current.children[1].children[0].value,
+      password: passwordRef.current.children[1].children[0].value
+    };
+    setProfile(credentials);
+
+    ;(async () => {
+      const authenticated = await EmailService.authenticateEmail(credentials)
+      
+      if(authenticated.data){
+        history.push("/email");
+      }
+      else{
+        console.log("Incorrect credentials");
+      }
+    })();
   }
+
   return (
     <div class="h-full">
       <form

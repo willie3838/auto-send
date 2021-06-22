@@ -1,6 +1,7 @@
 import React, { useContext, useEffect }  from "react";
 import { CardContent } from "@material-ui/core";
 import { InputField, CustomCard, ActionButton, Text, EmailPreview } from "./Materials";
+import EmailService from "../../services/EmailService"
 import UserProfile from "../../contexts/UserProfile";
 
 const Email = () => {
@@ -12,9 +13,20 @@ const Email = () => {
   const namesRef = React.createRef();
   const positionsRef = React.createRef();
   const messageRef = React.createRef();
-  
+
+  let emailContent = {};
+
   function handleClick(){
-    console.log(subjectRef);
+    emailContent['email'] = profile;
+    emailContent['subject'] = subjectRef.current.children[1].children[0].value;
+    emailContent['cc'] = ccRef.current.children[1].children[0].value;
+    emailContent['bcc'] = bccRef.current.children[1].children[0].value;
+    emailContent['recipients'] = recipientsRef.current.children[1].children[0].value;
+    emailContent['names'] = namesRef.current.children[1].children[0].value;
+    emailContent['positions'] = positionsRef.current.children[1].children[0].value;
+    emailContent['message'] = messageRef.current.children[1].children[0].value;
+    console.log("clicked")
+    EmailService.sendEmail(JSON.stringify(emailContent));
   }
 
   return (
@@ -141,7 +153,7 @@ const Email = () => {
             </div>
 
             <div class="grid grid-cols-1 px-2 mt-6">
-              <ActionButton onClick={handleClick.bind()}>Send Messages</ActionButton>
+              <ActionButton onClick={handleClick.bind(this)}>Send Messages</ActionButton>
             </div>
           </CardContent>
         </CustomCard>
@@ -164,3 +176,4 @@ const Email = () => {
 };
 
 export default Email;
+
