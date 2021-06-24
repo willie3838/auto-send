@@ -62,10 +62,6 @@ app.post('/send', (req, res) => {
 });
 
 app.post('/authenticate', (req, res) => {
-
-    console.log(req.body.email)
-    console.log(req.body.password)
-    
     let transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -83,6 +79,7 @@ app.post('/authenticate', (req, res) => {
 
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
+            console.log(error);
             res.send(false);
         }
         else{
