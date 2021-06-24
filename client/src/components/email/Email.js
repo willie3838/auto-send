@@ -19,13 +19,20 @@ import {
   HelpIcon,
   HelpDialog,
   ErrorDialog,
+  PromptDialog,
+  CredentialsDialog
 } from "./Materials";
 import EmailService from "../../services/EmailService";
 import UserProfile from "../../contexts/UserProfile";
+import { useHistory } from "react-router-dom";
 
 const Email = () => {
+  const history = useHistory();
+
   const [profile, setProfile] = useContext(UserProfile);
   const [openError, setOpenError] = useState(false);
+  const [openPrompt, setOpenPrompt] = useState(false);
+  const [openCredentials, setOpenCredentials] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -42,24 +49,28 @@ const Email = () => {
   const intro = ` To get started make sure you input an email subject, the list of recipients, and the message you want to send.`;
 
   const fieldInfoTitle = "Field Information";
-  const fieldInfoDesc = `- Recipients represents the emails of the people you want to send to
-  - Recipients represents the emails of the people you want to send to
+  const fieldInfoDesc = `- Recipients represent the emails of the people you want to send to
   - Names represents the names of the people you want to send to
   - Positions represents the positions that the people applied for`;
 
   const howTitle = "Filling out Fields:";
-  const howDesc = ` - If you plan to bcc/cc more than one person, make sure to separate their emails by a comma 
-  (Example: jane.doe@gmail.com, testing@gmail.com)
-
-  - Recipients, names, and position should also be separated by a comma if there are several people. Make sure you list them out in the same order
+  const howDesc = `- BCC, CC, Recipients, Names, and position should be separated by a comma if there are several people. Make sure you list them out in the same order
   (Example:
    Recipients: jane.doe@gmail.com, john@gmail.com
    Names: Jane, John
-   Position: Cookie, Monster)`;
+   Position: Cookie, Monster)
+   
+   - If you want to personalize your emails, be sure to input a name and/or the position the person applied to and fill out the message input using {name} and {position} variables to indicate where you want their names/position to be
+   (Example:
+    Message: Hi {name}, thanks for applying to {position}!)`;
 
   let emailContent = {};
 
   useEffect(() => {
+    if(!profile.email || !profile.password){
+      closeCredentialsDialog();
+    }
+
     setTimeout(() => setLoading(false), 700);
   }, []);
 
@@ -79,12 +90,15 @@ const Email = () => {
     (async () => {
       setLoading(true);
       const error = await EmailService.sendEmail(JSON.stringify(emailContent));
+      setLoading(false);
       if (!error.data) {
-        setLoading(false);
         setErrorMessage(
           "One or more of your recipients' emails are invalid, please check them over before sending an email again"
         );
-        setOpenError(!openError);
+        closeErrorDialog();
+      }
+      else{
+        closePromptDialog();
       }
     })();
   }
@@ -122,9 +136,50 @@ const Email = () => {
     setOpenError(!openError);
   }
 
+  function closePromptDialog() {
+    setOpenPrompt(!openPrompt);
+  }
+
+  function closeCredentialsDialog() {
+    setOpenCredentials(!openCredentials);
+  }
+
+  function login(){
+    closeCredentialsDialog();
+    history.goBack();
+  }
+
+
   return (
     <div class="h-full">
       <div class="px-2">
+        <CredentialsDialog open={openCredentials}>
+          <DialogTitle>Message</DialogTitle>
+          <DialogContent>
+            <Typography gutterBottom>Your email and password have been lost, please login again</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" onClick={login.bind(this)}>
+              Login
+            </Button>
+          </DialogActions>
+        </CredentialsDialog>
+
+        <PromptDialog open={openPrompt}>
+          <DialogTitle>Message</DialogTitle>
+          <DialogContent>
+            <Typography gutterBottom>Your emails have finished sending, would you like to send another batch?</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" onClick={closePromptDialog.bind(this)}>
+              No
+            </Button>
+            <Button color="primary" onClick={closePromptDialog.bind(this)}>
+              Yes
+            </Button>
+          </DialogActions>
+        </PromptDialog>
+
         <ErrorDialog open={openError}>
           <DialogTitle>Error</DialogTitle>
           <DialogContent>

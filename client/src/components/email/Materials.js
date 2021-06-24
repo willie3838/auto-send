@@ -97,6 +97,27 @@ const InputField = withStyles({
     }
   })(Dialog);
 
+
+  const PromptDialog = withStyles({
+    root: {
+      "& .MuiDialog-paper":{
+        backgroundColor: "#242424",
+        color: "#D1D5DB",
+        width: "50%",
+      }
+    }
+  })(Dialog);
+
+  const CredentialsDialog = withStyles({
+    root: {
+      "& .MuiDialog-paper":{
+        backgroundColor: "#242424",
+        color: "#D1D5DB",
+        width: "50%",
+      }
+    }
+  })(Dialog);
+
   export {
       InputField,
       CustomCard,
@@ -106,5 +127,7 @@ const InputField = withStyles({
       HelpIcon,
       EmailPreview,
       HelpDialog,
-      ErrorDialog
+      ErrorDialog,
+      PromptDialog,
+      CredentialsDialog
   }

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { ErrorDialog, Title, LoginTextField, LoginButton } from "./Materials";
 import {
   CircularProgress,
+  Link,
   Typography,
   Button,
   DialogTitle,
@@ -40,7 +41,6 @@ const Home = () => {
       } else {
         setLoading(false)
         openErrorDialog();
-        console.log("Incorrect credentials");
       }
     })();
   }
@@ -55,7 +55,8 @@ const Home = () => {
         <DialogTitle>Error</DialogTitle>
         <DialogContent>
           <Typography gutterBottom>
-            Incorrect email or password, please try again
+            If you have not allowed access to use less secure apps by clicking the link under password. 
+            Otherwise, you input an incorrect email or password, please try again.
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -89,9 +90,13 @@ const Home = () => {
               variant="outlined"
               fullWidth={true}
             />
+            <div>
+              <div class="display-inline mt-1">
+                <Link href="https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4MIyWKmQ1ug7ushrtZw2yrOZlFb1dJpsRFiPQGG_W1gjS8piN8qOxuKwJ8qObblHI3UfsVSQ9hPjxX27hFq9zHbM64Lfg" target="_blank" rel="noopener">Turn on Less Secure Apps</Link>
+              </div>
+            </div>
           </div>
-
-          <div class="w-96 mt-3 text-right">
+          <div class="w-96 text-right">
             <LoginButton onClick={handleClick.bind()} variant="contained">
               Login
             </LoginButton>
