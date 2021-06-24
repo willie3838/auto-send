@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 const app = express();
 
-const allowedOrigins=['http://localhost:3005'];
+const allowedOrigins=['http://localhost:8000'];
 const options = {
     origin: allowedOrigins
 };
