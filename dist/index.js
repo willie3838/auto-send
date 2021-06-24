@@ -23,12 +23,22 @@ app.get('/', (req, res) => {
 
 app.post('/send', (req, res) => {
     let transporter = nodemailer.createTransport({
-        service: "Gmail",
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: req.body.email,
             pass: req.body.password
         }
     });
+    
+    // let transporter = nodemailer.createTransport({
+    //     service: "Gmail",
+    //     auth: {
+    //         user: req.body.email,
+    //         pass: req.body.password
+    //     }
+    // });
 
     let recipients = req.body.recipients.split(",");
     let names = req.body.names.split(",");
@@ -63,7 +73,9 @@ app.post('/send', (req, res) => {
 
 app.post('/authenticate', (req, res) => {
     let transporter = nodemailer.createTransport({
-        service: "Gmail",
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: req.body.email,
             pass: req.body.password
