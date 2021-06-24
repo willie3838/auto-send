@@ -15,6 +15,12 @@ app.use(cors(options));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
+
 app.post('/send', (req, res) => {
     let transporter = nodemailer.createTransport({
         service: "Gmail",
