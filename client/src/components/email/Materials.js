@@ -1,5 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
-import { Button, TextField, Card, CardContent, Typography } from "@material-ui/core";
+import { Button, TextField, Card, CardContent, Typography, Dialog } from "@material-ui/core";
+import Help from "@material-ui/icons/Help";
 
 const InputField = withStyles({
     root: {
@@ -9,13 +10,13 @@ const InputField = withStyles({
 
       "& .MuiOutlinedInput-root": {
         "& .MuiOutlinedInput-input": {
-          color: "white",
+          color: "#D1D5DB",
         },
         "& fieldset": {
           borderColor: "#9CA3AF",
         },
         "&:hover fieldset": {
-          borderColor: "white",
+          borderColor: "#D1D5DB",
         },
         "&.Mui-focused fieldset": {
           borderColor: "#7C3AED",
@@ -25,7 +26,7 @@ const InputField = withStyles({
         },
       },
       "& .MuiInputLabel-root": {
-        color: "white",
+        color: "#D1D5DB",
       },
       
     },
@@ -42,7 +43,7 @@ const InputField = withStyles({
   const ActionButton = withStyles({
     root: {
       backgroundColor: "#7C3AED",
-      color: "white",
+      color: "#D1D5DB",
       width: "100 px",
 
       "&:hover": {
@@ -51,7 +52,7 @@ const InputField = withStyles({
     },
   })(Button);
 
-  const Text = withStyles({
+  const Title = withStyles({
     root: {
       color: "#7C3AED"
     }
@@ -59,14 +60,51 @@ const InputField = withStyles({
 
   const EmailPreview = withStyles({
       root: {
-          height: "100%"
+          height: "100%",
       }
   })(CardContent);
+
+  const Text = withStyles({
+    root: {
+        color: "#D1D5DB"
+    }
+    })(Typography);
+  
+  const HelpIcon = withStyles({
+    root: {
+      color:"#D1D5DB",
+      marginLeft: "5px",
+      marginBottom: "5px",
+    }
+  })(Help);
+
+  const HelpDialog = withStyles({
+    root: {
+      "& .MuiDialog-paper":{
+        backgroundColor: "#242424",
+        color: "#D1D5DB",
+      }
+    }
+  })(Dialog);
+
+  const ErrorDialog = withStyles({
+    root: {
+      "& .MuiDialog-paper":{
+        backgroundColor: "#242424",
+        color: "#D1D5DB",
+        width: "50%",
+      }
+    }
+  })(Dialog);
 
   export {
       InputField,
       CustomCard,
       ActionButton,
+      Title,
       Text,
-      EmailPreview
+      HelpIcon,
+      EmailPreview,
+      HelpDialog,
+      ErrorDialog
   }

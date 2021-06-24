@@ -1,4 +1,4 @@
-import { Typography, Button, TextField } from "@material-ui/core";
+import { Typography, Button, TextField, Dialog } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 const Title = withStyles({
@@ -15,13 +15,13 @@ const LoginTextField = withStyles({
       '& .MuiOutlinedInput-root': {
 
         '& .MuiOutlinedInput-input':{
-          color: 'white',
+          color: '#D1D5DB',
         },
         '& fieldset': {
           borderColor: '#9CA3AF',
         },
         '&:hover fieldset': {
-          borderColor: 'white',
+          borderColor: '#D1D5DB',
         },
         '&.Mui-focused fieldset': {
           borderColor: '#7C3AED',
@@ -29,7 +29,7 @@ const LoginTextField = withStyles({
         
       },
       '& .MuiInputLabel-root': {
-        color: 'white'
+        color: '#D1D5DB'
       }
 
     },
@@ -38,7 +38,7 @@ const LoginTextField = withStyles({
 const LoginButton = withStyles({
     root:{
       backgroundColor: '#7C3AED',
-      color: 'white',
+      color: '#D1D5DB',
       width: '100 px',
 
       '&:hover':{
@@ -47,8 +47,19 @@ const LoginButton = withStyles({
     },
   })(Button)
 
+const ErrorDialog = withStyles({
+  root: {
+    "& .MuiDialog-paper":{
+      backgroundColor: "#242424",
+      color: "#D1D5DB",
+      width: "50%",
+    }
+  }
+})(Dialog);
+
 export {
     Title,
     LoginTextField,
-    LoginButton
+    LoginButton,
+    ErrorDialog
 };
