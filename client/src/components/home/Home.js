@@ -91,23 +91,18 @@ const Home = () => {
               fullWidth={true}
             />
             <div>
-              <div class="mt-2">
-                
-           
-                <Link href="https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4MIyWKmQ1ug7ushrtZw2yrOZlFb1dJpsRFiPQGG_W1gjS8piN8qOxuKwJ8qObblHI3UfsVSQ9hPjxX27hFq9zHbM64Lfg" display="block" target="_blank" rel="noopener">Turn on Less Secure Apps</Link>
-    
-                <Link href="https://accounts.google.com/b/0/DisplayUnlockCaptcha" display="block" target="_blank" rel="noopener">Unlock Captcha</Link>
-            
-               
-  
+              <div class="mt-2 h-0">   
+                <Link zIndex="tooltip" href="https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4MIyWKmQ1ug7ushrtZw2yrOZlFb1dJpsRFiPQGG_W1gjS8piN8qOxuKwJ8qObblHI3UfsVSQ9hPjxX27hFq9zHbM64Lfg" display="block" target="_blank" rel="noopener">Turn on Less Secure Apps</Link>
+                <Link zIndex="tooltip" href="https://accounts.google.com/b/0/DisplayUnlockCaptcha" display="block" target="_blank" rel="noopener">Unlock Captcha</Link>
+                <LoginButton style={{position: "relative", left:"305px", bottom:"40px"}} onClick={handleClick.bind()} variant="contained">
+                  Login
+                </LoginButton>
               </div>
             </div>
           </div>
-          <div class="w-96 relative text-right bottom-10">
-            <LoginButton onClick={handleClick.bind()} variant="contained">
-              Login
-            </LoginButton>
-          </div>
+          
+          
+          
         </form>
       ) : (
         <div class="h-full flex flex-wrap content-center justify-center">
