@@ -18,9 +18,9 @@ This project was created with:
 
 ## How It Works
 
-# Login
+### Login
 
-# Sending Emails
+### Sending Emails
 
 ## Conclusion
 
