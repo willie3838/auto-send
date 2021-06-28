@@ -19,8 +19,14 @@ This project was created with:
 ## How It Works
 
 ### Login
+![Login](/photos/login.gif)
+
+Login with your email and password. Before logging in, make sure you enable less secure apps and access to captchas. If you're worried about security, you can turn off these settings afterwards by clicking the same link (the captcha access will disable automatically after a few hours).
 
 ### Sending Emails
+![Login](/photos/email.gif)
+
+To send multiple emails, make sure to separate your values by a comma.
 
 ## Conclusion
 
